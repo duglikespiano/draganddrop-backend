@@ -2,10 +2,10 @@ import express from 'express';
 import http from 'http';
 import cors from 'cors';
 import router from './routers/index.js';
+import { port } from './env.js';
 
 const app = express();
 const server = http.createServer(app);
-const port = 8000;
 
 app.use(express.json());
 app.use(cors({ origin: '*', optionsSuccessStatus: 200 }));
