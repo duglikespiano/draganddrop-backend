@@ -28,7 +28,7 @@ export const removeContent = async (req, res) => {
 	try {
 		const { id } = req.body;
 		await contentsService.removeContent(id);
-		res.status(204);
+		res.status(200).json({ message: 'CONTENT_REMOVED' });
 	} catch (error) {
 		console.error(error);
 		error.message = 'ERROR_OCCURRED';

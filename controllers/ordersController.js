@@ -2,12 +2,14 @@ import * as ordersService from '../services/ordersService.js';
 
 export const modifyContentsOrderInSameCategory = async (req, res) => {
 	try {
-		const { sourceContentOrderInf, targetContentOrderInf } = req.body;
+		const { contentCategoryId, sourceContentOrderInf, targetContentOrderInf } =
+			req.body;
 		await ordersService.modifyContentsOrderInSameCategory(
+			contentCategoryId,
 			sourceContentOrderInf,
 			targetContentOrderInf
 		);
-		res.status(200);
+		res.status(200).json({ message: 'CONTENTS ORDER MODIFIED' });
 	} catch (error) {
 		console.error(error);
 		error.message = 'ERROR_OCCURRED';
@@ -32,7 +34,7 @@ export const modifyContentsOrderAmongDifferentCategories = async (req, res) => {
 			sourceContentOrderInf,
 			targetContentOrderInf
 		);
-		res.status(200);
+		res.status(200).json({ message: 'CONTENTS MOVED TO OTHER CATEGORY' });
 	} catch (error) {
 		console.error(error);
 		error.message = 'ERROR_OCCURRED';
@@ -42,11 +44,9 @@ export const modifyContentsOrderAmongDifferentCategories = async (req, res) => {
 
 export const modifyCategoriesOrder = async (req, res) => {
 	try {
-		let { sourceOrderInf, targetOrderInf } = req.body;
-		sourceOrderInf = sourceOrderInf + 1;
-		targetOrderInf = targetOrderInf + 1;
+		const { sourceOrderInf, targetOrderInf } = req.body;
 		await ordersService.modifyCategoriesOrder(sourceOrderInf, targetOrderInf);
-		res.status(200);
+		res.status(200).json({ message: 'CATEGORY ORDER MODIFIED' });
 	} catch (error) {
 		console.error(error);
 		error.message = 'ERROR_OCCURRED';

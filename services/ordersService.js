@@ -1,10 +1,12 @@
 import * as ordersDao from '../models/ordersDao.js';
 
 export const modifyContentsOrderInSameCategory = async (
+	contentCategoryId,
 	sourceOrderInf,
 	targetOrderInf
 ) => {
 	return await ordersDao.modifyContentsOrderInSameCategory(
+		contentCategoryId,
 		sourceOrderInf,
 		targetOrderInf
 	);

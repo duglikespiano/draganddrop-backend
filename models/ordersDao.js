@@ -1,12 +1,14 @@
 import { myDataSource } from '../database/dataBase.js';
 
 export const modifyContentsOrderInSameCategory = async (
+	contentCategoryId,
 	sourceOrderInf,
 	targetOrderInf
 ) => {
 	await myDataSource
 		.execute(
-			`SELECT * FROM content WHERE orderInf = ${sourceOrderInf} OR orderInf = ${targetOrderInf}`
+			`SELECT * FROM content WHERE (category_id = ${contentCategoryId} AND orderInf = ${sourceOrderInf}) 
+			OR (category_id = ${contentCategoryId} AND orderInf = ${targetOrderInf})`
 		)
 		.then((result) => {
 			return result[0];
