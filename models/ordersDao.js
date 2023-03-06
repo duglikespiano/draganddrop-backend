@@ -36,7 +36,7 @@ export const modifyContentsOrderAmongDifferentCategories = async (
 	targetContentOrderInf
 ) => {
 	await myDataSource
-		.query(
+		.execute(
 			`UPDATE content SET orderInf = orderInf +1 WHERE category_id =${targetCategoryId} AND orderInf >= ${targetContentOrderInf}`
 		)
 		.then(() => {
@@ -46,7 +46,7 @@ export const modifyContentsOrderAmongDifferentCategories = async (
 			};
 		})
 		.then((data) => {
-			myDataSource.query(
+			myDataSource.execute(
 				`UPDATE content SET orderInf = orderInf-1 WHERE category_id =${data.sourceCategoryId} AND orderInf >= ${data.sourceContentOrderInf}`
 			);
 			return {
@@ -55,13 +55,13 @@ export const modifyContentsOrderAmongDifferentCategories = async (
 			};
 		})
 		.then((data) => {
-			myDataSource.query(
+			myDataSource.execute(
 				`UPDATE content SET orderInf=${data.targetContentOrderInf} WHERE id=${data.sourceContentId}`
 			);
 			return { targetCategoryId, sourceContentId };
 		})
 		.then((data) => {
-			myDataSource.query(
+			myDataSource.execute(
 				`UPDATE content SET category_id =${data.targetCategoryId} WHERE id = ${data.sourceContentId}`
 			);
 		});
